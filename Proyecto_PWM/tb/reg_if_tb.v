@@ -3,6 +3,12 @@
 
 module reg_if_tb;
 
+  // Dump para GTKWave
+  initial begin
+    $dumpfile("sim/reg_if_tb.vcd");
+    $dumpvars(0, reg_if_tb);
+  end
+
   // --------------------------------------------------
   // Señales de interfaz
   // --------------------------------------------------

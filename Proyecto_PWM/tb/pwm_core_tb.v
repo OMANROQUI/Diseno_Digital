@@ -3,6 +3,12 @@
 
 module pwm_core_tb;
 
+  // Dump para GTKWave
+  initial begin
+    $dumpfile("sim/pwm_core_tb.vcd");
+    $dumpvars(0, pwm_core_tb);
+  end
+
   // --------------------------------------
   // Señales
   // --------------------------------------

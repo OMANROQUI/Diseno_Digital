@@ -3,6 +3,12 @@
 
 module top_pwm_tb;
 
+  // Dump para GTKWave
+  initial begin
+    $dumpfile("sim/top_pwm_tb.vcd");
+    $dumpvars(0, top_pwm_tb);
+  end
+
   // --------------------------------------------------
   // Parámetros del bus
   // --------------------------------------------------
@@ -23,6 +29,7 @@ module top_pwm_tb;
 
   // Variables de test
   reg [31:0] read_val;
+  reg [31:0] expected_ctrl;
   integer    high_count, low_count, i;
 
   // --------------------------------------------------
@@ -40,7 +47,7 @@ module top_pwm_tb;
   );
 
   // --------------------------------------------------
-  // Generador de reloj (10 ns perí­odo)
+  // Generador de reloj (10 ns período)
   // --------------------------------------------------
   initial begin
     clk = 0;
@@ -94,28 +101,26 @@ module top_pwm_tb;
   // --------------------------------------------------
   initial begin
     // Inicialización
-    addr    = 8'h00;
-    wdata   = 32'h0;
-    wen     = 0;
-    ren     = 0;
+    addr  = 8'h00;
+    wdata = 32'h0;
+    wen   = 0;
+    ren   = 0;
 
-    // Esperar a salir de reset
     @(posedge reset_n);
     $display("** Top-level Testbench Started @ %0t **", $time);
 
     // ------------------------------------------------
-    // 1) Test básico de escritura/lectura de CTRL
+    // 1) Test escritura/lectura de CTRL
     // ------------------------------------------------
-    // Construye un wdata donde periodo=100, duty=30
-    wdata = {16'd100, 16'd30};
-    bus_write(ADDR_CTRL, wdata);
-    $display("WRITE CTRL = 0x%0h", wdata);
+    expected_ctrl = {16'd100, 16'd30};
+    $display("WRITE CTRL = 0x%0h", expected_ctrl);
+    bus_write(ADDR_CTRL, expected_ctrl);
 
     bus_read(ADDR_CTRL, read_val);
     $display("READ  CTRL via rdata = 0x%0h", read_val);
 
-    if (read_val !== wdata)
-      $error("FAIL: CTRL mismatch (0x%0h vs 0x%0h)", read_val, wdata);
+    if (read_val !== expected_ctrl)
+      $error("FAIL: CTRL mismatch (0x%0h vs expected 0x%0h)", read_val, expected_ctrl);
     else
       $display("PASS: CTRL read/write OK");
 
@@ -153,7 +158,6 @@ module top_pwm_tb;
     bus_read(ADDR_STATUS, read_val);
     $display("READ STATUS = 0x%0h", read_val);
 
-    // El bit [0] de status debe ser 1
     if (read_val[0] !== 1'b1)
       $error("FAIL: error_flag should be 1 when duty>period");
     else
