@@ -50,6 +50,8 @@ Verifica la lógica de acceso por bus a los registros de control y estado, asegu
 
 ![reg_if_tb.vcd waveform](C:/Users/omanr/Desktop/diseño/Diseno_Digital/Proyecto_PWM/tb/captura_reg_if.jpg)
 
+![reg_if_tb.vcd waveform](captura_reg_if.jpg)
+
 ---
 
 ### 2. `pwm_core_tb.v` — Testbench del Núcleo PWM (`pwm_core`)
@@ -73,7 +75,7 @@ Verifica el correcto funcionamiento del generador PWM para diferentes configurac
 *Inserta aquí tu captura de GTKWave mostrando los distintos ciclos de PWM:*
 
 ![pwm_core_tb.vcd waveform](C:/Users/omanr/Desktop/diseño/Diseno_Digital/Proyecto_PWM/tb/captura_pwm_core.jpg)
-
+![pwm_core_tb.vcd waveform](captura_pwm_core.jpg)
 ---
 
 ### 3. `top_pwm_tb.v` — Testbench Top-Level de Integración (`top_pwm`)
@@ -99,7 +101,7 @@ Ejercita el sistema completo, integrando el acceso por bus, la lógica de contro
 *Inserta aquí tu captura de GTKWave mostrando la secuencia completa:*
 
 ![top_pwm_tb.vcd waveform](C:/Users/omanr/Desktop/diseño/Diseno_Digital/Proyecto_PWM/tb/captura_top_pwm.jpg)
-
+![top_pwm_tb.vcd waveform](captura_top_pwm.jpg)
 ---
 
 ## Valores y detalles relevantes
