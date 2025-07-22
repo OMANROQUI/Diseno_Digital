@@ -23,19 +23,18 @@ Este proyecto implementa un **controlador PWM programable** en Verilog, pensado 
 
 *Inserta aquí tu diagrama de bloques (formato PNG/JPG):*
 
-![Diagrama de bloques](doc/DiagramaBloques.png)
+![Diagrama de bloques](DiagramaBloques.png)
 
 ---
 
 ## Estructura del proyecto
 
-Proyecto_PWM/
-├── rtl/ # Código fuente RTL en Verilog
-├── tb/ # Testbenches de los módulos
-├── sim/ # Scripts de simulación y Makefile
-├── demo/ # Demo de software (driver_stub)
+Proyecto_PWM/  
+├── rtl/ # Código fuente RTL en Verilog  
+├── tb/ # Testbenches de los módulos  
+├── sim/ # Scripts de simulación y Makefile  
+├── demo/ # Demo de software (driver_stub)  
 ├── README.md # (Este archivo)
-
 
 **¿Por qué esta estructura?**  
 - Permite separar claramente el diseño RTL, los bancos de pruebas, los scripts de automatización y las herramientas de demo.
@@ -108,23 +107,28 @@ Incluye un **driver stub** en Python para validar la lógica de acceso a registr
 
 ## Simulación y visualización de resultados
 
-**Simulación:**
+### Simulación
 
 Desde la raíz del proyecto puedes ejecutar:
 
 ```bash
 ./sim/runsim.sh all
-
-o
-
+# o bien
 make all
+```
 
-Visualización:
+### Visualización
+
 Abre los archivos VCD generados con GTKWave para analizar en detalle las señales de cada testbench:
 
+```bash
 gtkwave sim/top_pwm_tb.vcd
+```
 
-Autores y créditos
-  Diseño y verificación:
-    Oscar David Guerrero Hernandez
-    Omar Andres Rodriguez Quiceno
+---
+
+## Autores y créditos
+
+**Diseño y verificación:**  
+- Oscar David Guerrero Hernandez  
+- Omar Andres Rodriguez Quiceno
