@@ -135,14 +135,19 @@ Puedes visualizar y modificar este diagrama en [wavedrom.com/editor.html](https:
     "text": "Diagrama de tiempo PWM — Escritura y Error"
   }
 }
+```
+
+---
 
 ### Parámetros y convenciones
 
-ADDR_WIDTH: ancho del bus de direcciones (por defecto 8 bits).
+- **ADDR_WIDTH**: ancho del bus de direcciones (por defecto 8 bits).
+- **DATA_WIDTH**: ancho de los registros de datos (por defecto 32 bits).
+- **WIDTH_PERIOD / WIDTH_DUTY**: resolución del periodo y duty (por defecto 16 bits).
 
-DATA_WIDTH: ancho de los registros de datos (por defecto 32 bits).
+---
 
-WIDTH_PERIOD / WIDTH_DUTY: resolución del periodo y duty (por defecto 16 bits).
+### Ejemplo de acceso (pseudo-código)
 
 ```c
 // Configurar periodo=1000, duty=400
@@ -154,57 +159,12 @@ uint32_t status = read_reg(STATUS_ADDR);
 if (status & 0x1) {
   // Error: duty > period
 }
+```
 
+---
 
 ### Notas
 
-Todos los módulos están en Verilog-2001 para compatibilidad con Yosys y otros sintetizadores.
-
-El diseño es fácilmente extensible a más canales.
-
-La estructura modular facilita su portabilidad y mantenimiento.
-
-
-
-
-
-Parámetros y convenciones
-ADDR_WIDTH: ancho del bus de direcciones (por defecto 8 bits).
-
-DATA_WIDTH: ancho de los registros de datos (por defecto 32 bits).
-
-WIDTH_PERIOD / WIDTH_DUTY: resolución del periodo y duty (por defecto 16 bits).
-
-
-
-
-
-
-Ejemplo de acceso (pseudo-código)
-
-```c
-// Configurar periodo=1000, duty=400
-uint32_t ctrl = (1000 << 16) | 400;
-write_reg(CTRL_ADDR, ctrl);
-
-// Leer estado
-uint32_t status = read_reg(STATUS_ADDR);
-if (status & 0x1) {
-  // Error: duty > period
-}
-
-
-
-
-
-
-
-
-
-
-Notas
-Todos los módulos están en Verilog-2001 para compatibilidad con Yosys y otros sintetizadores.
-
-El diseño es fácilmente extensible a más canales.
-
-La estructura modular facilita su portabilidad y mantenimiento.
+- Todos los módulos están en Verilog-2001 para compatibilidad con Yosys y otros sintetizadores.
+- El diseño es fácilmente extensible a más canales.
+- La estructura modular facilita su portabilidad y mantenimiento.
