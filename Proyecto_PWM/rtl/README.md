@@ -8,7 +8,6 @@ El diseño es modular, reutilizable y compatible tanto con síntesis como simula
 ---
 
 ## Estructura de módulos
-
 rtl/
 ├── reg_if.v # Interfaz de registro de configuración y estado
 ├── pwm_core.v # Núcleo generador de señal PWM
@@ -100,12 +99,12 @@ Genera la señal PWM a partir de dos parámetros:
 A continuación se muestra un **diagrama de tiempo representativo** del funcionamiento del PWM y su configuración mediante registros.  
 Incluye el caso normal y la activación del flag de error cuando el duty es mayor al periodo.
 
-### **Vista gráfica**
+### Vista gráfica
 
-<!-- Inserta aquí la imagen exportada de WaveDrom (por ejemplo, como PNG) -->
-![Diagrama de tiempo PWM]((Diagrama_de_Tiempo.png) )
+<!-- Inserta aquí la imagen exportada de WaveDrom -->
+![Diagrama de tiempo PWM](Diagrama_de_Tiempo.png)
 
-### **Código WaveDrom**
+### Código WaveDrom
 
 Puedes visualizar y modificar este diagrama en [wavedrom.com/editor.html](https://wavedrom.com/editor.html):
 
@@ -139,6 +138,8 @@ Puedes visualizar y modificar este diagrama en [wavedrom.com/editor.html](https:
 
 
 
+
+
 Parámetros y convenciones
 ADDR_WIDTH: ancho del bus de direcciones (por defecto 8 bits).
 
@@ -146,7 +147,14 @@ DATA_WIDTH: ancho de los registros de datos (por defecto 32 bits).
 
 WIDTH_PERIOD / WIDTH_DUTY: resolución del periodo y duty (por defecto 16 bits).
 
+
+
+
+
+
 Ejemplo de acceso (pseudo-código)
+
+```c
 // Configurar periodo=1000, duty=400
 uint32_t ctrl = (1000 << 16) | 400;
 write_reg(CTRL_ADDR, ctrl);
@@ -158,10 +166,17 @@ if (status & 0x1) {
 }
 
 
+
+
+
+
+
+
+
+
 Notas
 Todos los módulos están en Verilog-2001 para compatibilidad con Yosys y otros sintetizadores.
 
 El diseño es fácilmente extensible a más canales.
 
 La estructura modular facilita su portabilidad y mantenimiento.
-
